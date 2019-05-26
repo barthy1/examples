@@ -3,6 +3,9 @@ language: go
 go:
     - "1.12"
 
+env:
+ - secure: "Z7X9Tbtz3f0WNagTMLiuzx8qgfhtJLv3ed04EgCrgzhyjdDSmpLkgNz4dtHUpENTxknV0A8VPcRfeWZCTpRgH1NM9dbJBYqv41QPFKtnmCWm/KomnXAGeXHZ/CifwgL+uTW7M6dfRXSLiGorOONB2Jbq++/2LspKO8eTK6y5Gr8GULaI2sovmjwzZJJ6BVzCMvta9heIt4JwHPW1RQWh8RBnaDNw9MXXti2rdbSZV+1WPuTasE+ePffMxAWbonnEJ3v78nH5gjzQLeHoCEyRcbpwwfhCEkaSJ7qQtHbF6/Ek7+rgO6tMeiAY2zBRR6NcvmiPNTISjIDkHNLem290Q4FNcSbzYOtKQx/toD5d1J+H94rpm+ODYbbRdhPXx31y410RrsplpI2mm/6jARm9MFgRjw8JKvrqpEoonYU/P05V44E2y3YINSL1s7EewhL/maj7quKulJBiqlcrFcbINGaEFnxD91C/rgjW6ZKeIUibaikUcSIIfIiFre3AD4YjVbE6yEfJt+a5GG2prDQ180rk9+GtvqbJLDCgW7QHIJ5n3eGN8mta3x7gUyPIBD/wndZnYOUwC3n0QVcPfRwB3TF9cnt8XIoYng1h7OSkKrZ2yvt9FfSAvSd7oeya3fMLvr6b8ayLymtfVl/w+k173aX2Squ66k+p60GNTneI8Kc="
+
 services:
   - docker
 
@@ -15,6 +18,8 @@ script:
 before_install:
   # Download and install Kind and kubectl
   - gem install gist
+  - echo $MY_SECRET_TOKEN > ~/.gist
+  - gist -l
   - GO111MODULE=on go get sigs.k8s.io/kind
   - kind create cluster --config kind-config.yaml
   - export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
