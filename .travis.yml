@@ -10,9 +10,11 @@ install: true
 
 script: 
   - echo "Run your tests here"
+  - gem install gist
 
 before_install:
   # Download and install Kind and kubectl
+  - gem install gist
   - GO111MODULE=on go get sigs.k8s.io/kind
   - kind create cluster --config kind-config.yaml
   - export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
@@ -24,3 +26,4 @@ before_install:
   - mkdir logs
   - kind export logs $PWD/logs
   - tar -czvf logs.tgz logs
+
