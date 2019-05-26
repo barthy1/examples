@@ -30,5 +30,4 @@ before_install:
   - ./kubectl run -it  hello --image alpine -- sh -c 'apk add curl;curl http://google.com'
   - mkdir logs
   - kind export logs $PWD/logs
-  - tar -czvf logs.tgz logs
-
+  - find logs | xargs gist
