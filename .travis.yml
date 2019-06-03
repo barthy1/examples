@@ -21,7 +21,8 @@ before_install:
   - echo $MY_SECRET_TOKEN > ~/.gist
   - gist -l
   - GO111MODULE=on go get sigs.k8s.io/kind
-  - kind create cluster --config kind-config.yaml
+  - kind build node-image --type apt
+  - kind create cluster --config kind-config.yaml --image kindest/node:latest
   - export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
