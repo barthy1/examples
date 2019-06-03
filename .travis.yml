@@ -20,7 +20,7 @@ before_install:
   - gem install gist
   - echo $MY_SECRET_TOKEN > ~/.gist
   - gist -l
-  - GO111MODULE=on go get sigs.k8s.io/kind
+  - GO111MODULE=on go get -u -v sigs.k8s.io/kind@master
   - kind build node-image --type apt
   - kind create cluster --config kind-config.yaml --image kindest/node:latest
   - export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
